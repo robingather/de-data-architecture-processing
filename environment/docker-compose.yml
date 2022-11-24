@@ -4,17 +4,17 @@ volumes:
   spark-data:
     driver_opts:
       type: none
-      device: /home/rgather/data
+      device: /home/rgather11/rg-data
       o: bind
   notebooks:
     driver_opts:
       type: none
-      device: /home/rgather/notebooks
+      device: /home/rgather11/rg-notebooks
       o: bind
   spark-checkpoint:
     driver_opts:
       type: none
-      device: /home/rgather/checkpoint
+      device: /home/rgather11/rg-checkpoint
       o: bind
 services:
   spark-driver-app:
