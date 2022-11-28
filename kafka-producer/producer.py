@@ -26,6 +26,6 @@ if __name__ == '__main__':
         lines = f.readlines()
 
     for line in lines:
-        kafka_python_producer_sync(producer, line, 'songs')
+        kafka_python_producer_sync(producer, line[:-1], 'songs')
 
     f.close()
