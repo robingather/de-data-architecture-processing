@@ -1,0 +1,20 @@
+SELECT track_genre, 
+(duration*amount+duration_s*amount_s)/(amount+amount_s) AS duration_c,
+(dance*amount+dance_s*amount_s)/(amount+amount_s) AS dance_c,
+(energy*amount+energy_s*amount_s)/(amount+amount_s) AS energy_c,
+(loud*amount+loud_s*amount_s)/(amount+amount_s) AS loud_c,
+(speech*amount+speech_s*amount_s)/(amount+amount_s) AS speech_c,
+(acoustic*amount+acoustic_s*amount_s)/(amount+amount_s) AS acoustic_c,
+(instrument*amount+instrument_s*amount_s)/(amount+amount_s) AS instrument_c,
+(live*amount+live_s*amount_s)/(amount+amount_s) AS live_c,
+(positive*amount+positive_s*amount_s)/(amount+amount_s) AS positive_c,
+(tempo*amount+tempo_s*amount_s)/(amount+amount_s) AS tempo_c,
+amount+amount_s as amount_c,
+lead_artist,
+lead_streams AS artist_streams,
+tracks_amount AS artist_tracks
+FROM `de2022-362710.musicdataset.genre-attributes-success` 
+LEFT JOIN `de2022-362710.musicdataset.genre-attributes-stream` USING (track_genre)
+ORDER BY artist_streams DESC
+
+LIMIT 10;

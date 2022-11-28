@@ -19,10 +19,9 @@ def kafka_python_producer_async(producer, msg, topic):
     producer.send(topic, bytes(msg, encoding='utf-8')).add_callback(success).add_errback(error)
     producer.flush()
 
-
 if __name__ == '__main__':
-    producer = KafkaProducer(bootstrap_servers='34.147.0.237:9092')  # use your VM's external IP Here!
-    with open('D:/Github Repo/de-data-architecture-processing/data/spotify-stream.txt', encoding="utf-8") as f:
+    producer = KafkaProducer(bootstrap_servers='34.147.50.89:9092')  # use your VM's external IP Here!
+    with open('D:/Github Repo/de-data-architecture-processing/data/spotify-song-stream.csv', encoding="utf-8") as f:
         lines = f.readlines()
 
     for line in lines:
