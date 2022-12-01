@@ -1,20 +1,23 @@
-SELECT track_genre, 
-(duration*amount+duration_s*amount_s)/(amount+amount_s) AS duration_c,
-(dance*amount+dance_s*amount_s)/(amount+amount_s) AS dance_c,
-(energy*amount+energy_s*amount_s)/(amount+amount_s) AS energy_c,
-(loud*amount+loud_s*amount_s)/(amount+amount_s) AS loud_c,
-(speech*amount+speech_s*amount_s)/(amount+amount_s) AS speech_c,
-(acoustic*amount+acoustic_s*amount_s)/(amount+amount_s) AS acoustic_c,
-(instrument*amount+instrument_s*amount_s)/(amount+amount_s) AS instrument_c,
-(live*amount+live_s*amount_s)/(amount+amount_s) AS live_c,
-(positive*amount+positive_s*amount_s)/(amount+amount_s) AS positive_c,
-(tempo*amount+tempo_s*amount_s)/(amount+amount_s) AS tempo_c,
-amount+amount_s as amount_c,
+SELECT track_genre AS genre, 
+IF(popularity_s IS NOT NULL, ROUND((popularity*amount+popularity_s*amount_s)/(amount+amount_s),0), popularity) AS popularity,
+IF(duration_ms_s IS NOT NULL, ROUND((duration_ms*amount+duration_ms_s*amount_s)/(amount+amount_s)/1000,0), duration_ms/1000) AS duration_seconds,
+IF(danceability_s IS NOT NULL, ROUND((danceability*amount+danceability_s*amount_s)/(amount+amount_s),3), danceability) AS dancability,
+IF(energy_s IS NOT NULL, ROUND((energy*amount+energy_s*amount_s)/(amount+amount_s),3), energy) AS energy,
+IF(loudness_s IS NOT NULL, ROUND((loudness*amount+loudness_s*amount_s)/(amount+amount_s),3), loudness) AS loudness,
+IF(speechiness_s IS NOT NULL, ROUND((speechiness*amount+speechiness_s*amount_s)/(amount+amount_s),3), speechiness) AS speechiness,
+IF(acousticness_s IS NOT NULL, ROUND((acousticness*amount+acousticness_s*amount_s)/(amount+amount_s),3), acousticness) AS acousticness,
+IF(intrumentalness_s IS NOT NULL, ROUND((intrumentalness*amount+intrumentalness_s*amount_s)/(amount+amount_s),3), intrumentalness) AS instrumentalness,
+IF(liveness_s IS NOT NULL, ROUND((liveness*amount+liveness_s*amount_s)/(amount+amount_s),3), liveness) AS liveness,
+IF(positivity_s IS NOT NULL, ROUND((positivity*amount+positivity_s*amount_s)/(amount+amount_s),3), positivity) AS positivity,
+IF(explicit_perc_s IS NOT NULL, ROUND((explicit_perc*amount+explicit_perc_s*amount_s)/(amount+amount_s),3), explicit_perc) AS explicit_perc,
+IF(explicit_pop_corr_s IS NOT NULL, ROUND((explicit_pop_corr*amount+explicit_pop_corr_s*amount_s)/(amount+amount_s),3), explicit_pop_corr) AS explicit_pop_corr,
+IF(tempo_s IS NOT NULL, ROUND((tempo*amount+tempo_s*amount_s)/(amount+amount_s),0), tempo) AS tempo,
+IF(amount_s IS NOT NULL, amount+amount_s, amount) AS entry_amount,
 lead_artist,
-lead_streams AS artist_streams,
+lead_streams*1000000 AS artist_streams,
 tracks_amount AS artist_tracks
-FROM `de2022-362710.musicdataset.genre-attributes-success` 
-LEFT JOIN `de2022-362710.musicdataset.genre-attributes-stream` USING (track_genre)
-ORDER BY artist_streams DESC
+FROM `de2022-362710.musicdataset.genre-characteristics-batch` 
+LEFT JOIN `de2022-362710.musicdataset.genre-characteristics-stream` USING (track_genre)
+ORDER BY popularity DESC
 
 LIMIT 10;

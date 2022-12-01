@@ -10,8 +10,7 @@ def create_topics(admin, topic_list):
 
 
 if __name__ == '__main__':
-    admin_client = KafkaAdminClient(bootstrap_servers="34.147.50.89:9092",
+    admin_client = KafkaAdminClient(bootstrap_servers="34.141.140.235:9092",
                                     client_id='Spotty')  # use your VM's external IP Here!
-    topic_list = [NewTopic(name="songs", num_partitions=1, replication_factor=1),
-                  NewTopic(name="popularity", num_partitions=1, replication_factor=1)]
+    topic_list = [NewTopic(name="songs", num_partitions=1, replication_factor=1)]
     create_topics(admin_client, topic_list)
