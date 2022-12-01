@@ -1,6 +1,0 @@
-# TODO
-# [X] make query robust against 0 entries from stream (if else)
-# [X] make nice displays n pages (one for selecting genre, one for all genres)
-# [X] rename colums to nice names
-# [] make little better random data with random normal dist
-# [X] fix size of streams

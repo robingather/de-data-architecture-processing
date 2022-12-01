@@ -1,2 +1,2 @@
-Spotify artist data:
-Spotify songs data:
+Spotify artist data: https://www.kaggle.com/datasets/adnananam/spotify-artist-stats
+Spotify songs data: https://www.kaggle.com/datasets/mrmorj/dataset-of-songs-in-spotify
